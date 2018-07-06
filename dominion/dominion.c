@@ -580,6 +580,7 @@ int drawCard(int player, struct gameState *state)
   return 0;
 }
 
+
 int getCost(int cardNumber)
 {
   switch( cardNumber ) 
@@ -686,7 +687,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	z=z-1;
       }
       return 0;
-			
+		
+
+
+
+
     case council_room:
       //+4 Cards
       for (i = 0; i < 4; i++)
@@ -710,7 +715,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       discardCard(handPos, currentPlayer, state, 0);
 			
       return 0;
-			
+		
+
+
+
+
     case feast:
       //gain card with cost up to 5
       //Backup hand
@@ -826,6 +835,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 	}
 
 
+
       return 0;
 		
     case smithy:
@@ -901,6 +911,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       
       return 0;
 		
+
     case great_hall:
       //+1 Card
       drawCard(currentPlayer, state);
@@ -1159,6 +1170,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       //set outpost flag
       state->outpostPlayed++;
 			
+      
       //discard card
       discardCard(handPos, currentPlayer, state, 0);
       return 0;
