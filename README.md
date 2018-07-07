@@ -1,2 +1,1 @@
-# CS362-004-U2018
-Summer term 2018 E-Campus Class
+The refactored code is in the dominion file.
