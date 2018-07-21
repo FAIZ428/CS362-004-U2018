@@ -1,0 +1,145 @@
+        -:    0:Source:cardtest2.c
+        -:    0:Graph:cardtest2.gcno
+        -:    0:Data:cardtest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <assert.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <string.h>
+        -:    9:
+        -:   10:
+        -:   11:
+        -:   12:
+        -:   13:// verify the test
+        -:   14:int counterVariable = 0 ; 
+        -:   15:
+        -:   16:
+        -:   17:// assertTrue function to collect coverage
+function assertTrueFunction called 16 returned 100% blocks executed 100%
+        -:   18:void assertTrueFunction(int x, int y){
+        -:   19:
+       16:   20:	if (x == y){
+branch  0 taken 94%
+branch  1 taken 6%
+       15:   21:		printf("Test: PASSED\n" );
+       15:   22:	}
+        -:   23:
+        -:   24:
+        -:   25:	else {
+        1:   26:		printf("Test: FAILED" );
+        -:   27:    
+        1:   28:	counterVariable ++; 
+        -:   29:}
+        -:   30:
+       16:   31:}
+        -:   32:
+        -:   33:
+function main called 1 returned 100% blocks executed 88%
+        -:   34:int main(){
+        -:   35:
+        -:   36:
+        1:   37:				int choice_1 = 0 ;
+        1:   38:    			int choice_2 = 0; 
+        1:   39:    			int choice_3 = 0 ; 
+        -:   40:    			
+        -:   41:    		 
+        1:   42:				int bonus = 0 ; 
+        -:   43: 				
+        1:   44: 				int numPlayers = 2; 
+        -:   45:    			
+        1:   46:    			int player_0 = 0;
+        1:   47:    			int player_1 = 1 ; 
+        -:   48:    			
+        -:   49:    			
+        1:   50:    			int handPos = 0 ;
+        -:   51:
+        1:   52:    			int k[10] = {adventurer, council_room, feast, gardens, mine
+        -:   53:               , remodel, smithy, village, baron, great_hall};
+        -:   54:
+        1:   55:               int seed = 200; 
+        -:   56:
+        -:   57:               struct gameState state , stateOriginal; 
+        -:   58:
+        1:   59:               printf("TESTING  smithyCard()\n");
+        -:   60:
+        -:   61:
+        1:   62:               memset(&state,23,sizeof(struct gameState)); 
+        -:   63:
+        1:   64:               memset(&stateOriginal,23,sizeof(struct gameState)); 
+        -:   65:
+        -:   66:
+        -:   67:
+        1:   68:               initializeGame(numPlayers,k, seed, &state);
+        -:   69:
+        -:   70:
+        1:   71:                memcpy(&stateOriginal,&state,sizeof(struct gameState));
+        -:   72:
+        -:   73:                // call cardEffect function 
+        1:   74:                cardEffect(smithy, choice_1, choice_2, choice_3,&state,handPos, &bonus);
+        -:   75:
+        -:   76:
+        -:   77:
+        -:   78:
+        1:   79:                printf("\n The player_0 gains 3 cards\n");
+        1:   80:                assertTrueFunction(state.handCount[player_0],stateOriginal.handCount[player_0] + 2);
+        -:   81:
+        -:   82:
+        1:   83:                 	printf("\nvictory card piles is the same\n");
+        1:   84:                 	printf("Province Pile\n");
+        1:   85:                 	assertTrueFunction(state.supplyCount[province],stateOriginal.supplyCount[province]);
+        1:   86:                     printf("Duchy Pile\n");
+        1:   87:                     assertTrueFunction(state.supplyCount[duchy],stateOriginal.supplyCount[duchy]);
+        1:   88:					printf("Estate Pile\n");
+        1:   89:			    	assertTrueFunction(state.supplyCount[estate],stateOriginal.supplyCount[estate]);
+        -:   90:
+        -:   91:
+        1:   92:			    	  	printf("\n kingdom card pile is the same\n");
+       22:   93:			    	  	for (int i = 0; i<10; ++i){
+branch  0 taken 91%
+branch  1 taken 9%
+       10:   94:    					printf("testing the cards piles . . . \n");
+        -:   95:
+       10:   96:    					assertTrueFunction(state.supplyCount [k[i]],stateOriginal.supplyCount[k[i]]);
+        -:   97:
+       10:   98:    				}
+        -:   99:
+        1:  100:				printf("\nPlayer_1 remains the same\n");
+        -:  101:    			
+        1:  102:    			printf("Hand Count\n");
+        -:  103:    			
+        1:  104:    			assertTrueFunction(state.handCount[player_1],stateOriginal.handCount[player_1]);
+        -:  105:    			
+        1:  106:    			printf("Deck Count\n");
+        -:  107:    			
+        1:  108:    			assertTrueFunction(state.deckCount[player_1],stateOriginal.deckCount[player_1]);
+        -:  109:
+        -:  110:
+        -:  111:
+        1:  112:    			if(counterVariable){
+branch  0 taken 100%
+branch  1 taken 0%
+        1:  113:                                    printf("\nTest: Test Failed\n");
+        1:  114:                                    printf("Failed:  %d\n",counterVariable);
+        -:  115:                                
+        1:  116:                                }
+        -:  117:
+        -:  118:                                else {
+        -:  119:
+    #####:  120:                                    printf("\nTest: Test Concluded\n\n");
+        -:  121:                                }
+        -:  122:
+        -:  123:
+        -:  124:
+        1:  125:                                return 0 ; 
+        -:  126:
+        -:  127:
+        -:  128:
+        -:  129:
+        -:  130:
+        -:  131:
+        -:  132:}

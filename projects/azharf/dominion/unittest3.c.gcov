@@ -1,0 +1,111 @@
+        -:    0:Source:unittest3.c
+        -:    0:Graph:unittest3.gcno
+        -:    0:Data:unittest3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <assert.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <string.h>
+        -:    9:
+        -:   10:// verify the test
+        -:   11:int counterVariable = 0 ; 
+        -:   12:
+        -:   13:
+        -:   14:// assertTrue function to collect coverage
+function assertTrueFunction called 2 returned 100% blocks executed 80%
+        -:   15:void assertTrueFunction(int x, int y){
+        -:   16:
+        2:   17:     if (x == y){
+branch  0 taken 100%
+branch  1 taken 0%
+        2:   18:          printf("Test: PASSED\n" );
+        2:   19:     }
+        -:   20:
+        -:   21:
+        -:   22:     else {
+    #####:   23:          printf("Test: FAILED" );
+        -:   24:  
+    #####:   25:     counterVariable++; 
+        -:   26:}
+        -:   27:
+        2:   28:}
+        -:   29:
+        -:   30:
+        -:   31:// main driver to test out the function
+        -:   32:
+function main called 1 returned 100% blocks executed 80%
+        -:   33:int main(){
+        -:   34:
+        -:   35:	int r;
+        1:   36:	int numPlayers = 2;
+        -:   37:
+        -:   38:	// the kingdom cards
+        1:   39:	int k[10] = {adventurer, council_room, feast, gardens, mine
+        -:   40:               , remodel, smithy, village, baron, great_hall};
+        -:   41:
+        -:   42:
+        -:   43:     struct gameState G;
+        1:   44:     int seed = 2000;
+        -:   45:
+        1:   46:     printf ("TESTING isGameOver():\n");
+        -:   47:
+        1:   48:     memset(&G,23,sizeof(struct gameState));   // clear the game state
+        -:   49:
+        1:   50:     r = initializeGame(numPlayers,k,seed,&G);
+        -:   51:
+        1:   52:     G.supplyCount[province] = 1;
+        -:   53:
+        1:   54:     G.supplyCount[0] = 0;
+        -:   55:
+        1:   56:     G.supplyCount[1] = 0; 
+        -:   57:
+        1:   58:     G.supplyCount[2] = 0; 
+        -:   59:
+        1:   60:     printf("\nThree empty piles given\n");
+        -:   61:
+        -:   62:
+        1:   63:     assertTrueFunction(isGameOver(&G),1);
+        -:   64:
+        -:   65:   	// verify that cards empty  
+        1:   66:     G.supplyCount[0] = 1; 
+        -:   67:
+        1:   68:     G.supplyCount[1] = 1; 
+        -:   69:
+        1:   70:     G.supplyCount[2] = 1; 
+        -:   71:
+        -:   72:
+        1:   73:     printf("\n The province Cards arent empty\n");
+        1:   74:     printf("\n The Three supply piles arent empty\n");
+        -:   75:
+        -:   76:
+        1:   77:     assertTrueFunction(isGameOver(&G),0);
+        -:   78:
+        -:   79:
+        1:   80:     if (counterVariable){
+branch  0 taken 0%
+branch  1 taken 100%
+        -:   81:
+    #####:   82:     	printf("Test: Test Failed\n");
+    #####:   83:     	printf("Test: Test Failed %d\n",counterVariable);
+        -:   84:     
+    #####:   85:     }
+        -:   86:
+        -:   87:     else {
+        1:   88:     	printf("\nTest: Test passed\n\n");
+        -:   89:     }
+        -:   90:
+        -:   91:
+        1:   92:     return 0 ; 
+        -:   93:
+        -:   94:
+        -:   95:
+        -:   96:
+        -:   97:
+        -:   98:
+        -:   99:
+        -:  100:}

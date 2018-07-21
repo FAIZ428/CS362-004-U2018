@@ -1,0 +1,141 @@
+        -:    0:Source:unittest4.c
+        -:    0:Graph:unittest4.gcno
+        -:    0:Data:unittest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:
+        -:    2:#include "dominion.h"
+        -:    3:#include "dominion_helpers.h"
+        -:    4:#include "rngs.h"
+        -:    5:#include <assert.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <math.h>
+        -:    8:#include <stdlib.h>
+        -:    9:#include <string.h>
+        -:   10:
+        -:   11:
+        -:   12:// verify the test
+        -:   13:int counterVariable = 0 ; 
+        -:   14:
+        -:   15:
+        -:   16:// assertTrue function to collect coverage
+function assertTrueFunction called 5 returned 100% blocks executed 80%
+        -:   17:void assertTrueFunction(int x, int y){
+        -:   18:
+        5:   19:  if (x == y){
+branch  0 taken 100%
+branch  1 taken 0%
+        5:   20:    printf("Test: PASSED\n" );
+        5:   21:  }
+        -:   22:
+        -:   23:
+        -:   24:  else {
+    #####:   25:    printf("Test: FAILED" );
+        -:   26:  
+    #####:   27:  counterVariable++; 
+        -:   28:}
+        -:   29:
+        5:   30:}
+        -:   31:
+        -:   32:
+        -:   33:
+        -:   34:
+function main called 1 returned 100% blocks executed 80%
+        -:   35:int main() { 
+        -:   36:
+        -:   37:
+        -:   38:
+        1:   39:    int k[10] = {adventurer, council_room, feast, gardens, mine
+        -:   40:               , remodel, smithy, village, baron, great_hall};
+        -:   41:
+        1:   42:       int seed = 2000;
+        -:   43:
+        -:   44:
+        -:   45:       
+        -:   46:       struct gameState G;
+        -:   47:
+        -:   48:         
+        1:   49:         printf ("TESTING gainCard():\n");
+        -:   50:            
+        1:   51:              memset(&G, 23, sizeof(struct gameState));
+        -:   52:         
+        1:   53:          initializeGame(2, k, seed , &G);
+        -:   54:
+        -:   55:         
+        -:   56:         // empty out the gold pile 
+        -:   57:         
+        1:   58:         printf("\nGold pile empty\n");
+        -:   59:         
+        -:   60:         
+        1:   61:         G.supplyCount[gold] = 0; 
+        1:   62:                    assertTrueFunction(gainCard(gold,&G,0,0), - 1);
+        -:   63:        
+        -:   64:
+        1:   65:         G.supplyCount[gold] = 30; 
+        -:   66:
+        -:   67:         
+        -:   68:
+        -:   69:
+        -:   70:
+        1:   71:         printf("\n Card has been added to deck\n");
+        -:   72:         
+        1:   73:         int deckCount = G.deckCount[0];
+        -:   74:         
+        1:   75:         gainCard(gold,&G, 1 , 0); 
+        -:   76:         
+        1:   77:         assertTrueFunction(deckCount+1,G.deckCount[0]);
+        -:   78:
+        -:   79:
+        1:   80:         printf("\nAdding card to hand\n");
+        -:   81:         
+        1:   82:         int handCount = G.handCount[0];
+        -:   83:         
+        1:   84:         gainCard(gold,&G, 2, 0 );
+        -:   85:         
+        1:   86:         assertTrueFunction(handCount + 1, G.handCount[0]);
+        -:   87:
+        -:   88:
+        1:   89:        printf("\nAdding card to discard pile\n");
+        -:   90:        
+        1:   91:        int discardCount = G.discardCount[0];
+        -:   92:        
+        1:   93:        gainCard(gold,&G,0,0); 
+        -:   94:        
+        1:   95:        assertTrueFunction(discardCount+1, G.discardCount[0]);
+        -:   96:    
+        -:   97:
+        -:   98:
+        -:   99:
+        -:  100:
+        1:  101:        printf("\n Decreasing gold supply from hand\n");
+        -:  102:        
+        1:  103:        int goldSupply = G.supplyCount[gold];
+        -:  104:       
+        1:  105:        gainCard(gold, &G, 0, 0 ); 
+        -:  106:        
+        1:  107:        assertTrueFunction(goldSupply-1, G.supplyCount[gold]);
+        -:  108:
+        -:  109:
+        -:  110:
+        1:  111:      if (counterVariable){
+branch  0 taken 0%
+branch  1 taken 100%
+        -:  112:
+    #####:  113:      printf("\nTest: Test Failed\n");
+        -:  114:     
+    #####:  115:      printf("Test: Test Failed %d\n",counterVariable);
+        -:  116:     
+    #####:  117:     }
+        -:  118:
+        -:  119:     else {
+        1:  120:      printf("\nTest: Test passed\n\n");
+        -:  121:     }
+        -:  122:
+        1:  123:     return 0 ; 
+        -:  124:
+        -:  125:
+        -:  126:
+        -:  127:
+        -:  128:
+        -:  129:
+        -:  130:}
