@@ -52,7 +52,7 @@ int main(){
     			int k[10] = {adventurer, council_room, feast, gardens, mine
                , remodel, smithy, village, baron, great_hall};
 
-               int seed = 200; 
+               int seed = 2000; 
 
                struct gameState state , stateOriginal; 
 
