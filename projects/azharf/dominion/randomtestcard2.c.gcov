@@ -1,0 +1,261 @@
+        -:    0:Source:randomtestcard2.c
+        -:    0:Graph:randomtestcard2.gcno
+        -:    0:Data:randomtestcard2.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <time.h>
+        -:    9:#include <stdio.h>
+        -:   10:#include <string.h>
+        -:   11:
+        -:   12:
+        -:   13:
+        -:   14:
+        -:   15:
+        -:   16:
+        -:   17:// counter variables defined
+        -:   18:
+        -:   19:int cardEffectsFail = 0; 
+        -:   20:int discardCardFails = 0 ; 
+        -:   21:int drawCardFail = 0 ; 
+        -:   22:int deckHandCountFail = 0; 
+        -:   23:
+        -:   24:
+function smithyTesting called 20000 returned 100% blocks executed 47%
+        -:   25:void smithyTesting( int player, struct gameState *afterGame){
+        -:   26:
+        -:   27:
+        -:   28:  int i; 
+        -:   29:  
+        -:   30:  int j ; 
+        -:   31:  
+        -:   32:  int k; 
+        -:   33:  
+        -:   34:  int l ; 
+        -:   35:  
+        -:   36:  int m ; 
+        -:   37:
+        -:   38:
+        -:   39:// craete gamestate to verify the function
+        -:   40: struct gameState newGame ; 
+        -:   41:
+        -:   42:
+        -:   43:
+        -:   44:
+    20000:   45:memcpy(&newGame,afterGame,sizeof(struct gameState));
+        -:   46:
+    20000:   47:int bonus  = 0; 
+        -:   48:
+        -:   49:// testing the function smithy card 
+    20000:   50:i = cardEffect(smithy,0,0,0, afterGame,0, &bonus);
+        -:   51:
+    20000:   52:j = drawCard(player, &newGame); 
+        -:   53:
+    20000:   54:k = drawCard(player, &newGame);
+        -:   55:
+    20000:   56:l = drawCard(player, &newGame); 
+        -:   57:
+    20000:   58: m = discardCard(0, player, &newGame,0);
+        -:   59:
+        -:   60: // retrieve values deck
+        -:   61:
+        -:   62: 
+    20000:   63:  int afterHC = afterGame->handCount[player];
+        -:   64:  
+    20000:   65:  int afterDC = afterGame->deckCount[player]; 
+        -:   66:
+    20000:   67:  int beforeHC = newGame.handCount[player];
+        -:   68:  
+    20000:   69:  int beforeDC =  newGame.deckCount[player];
+        -:   70:
+        -:   71: 
+        -:   72:
+        -:   73:
+        -:   74:
+    20000:   75:  if (j == -1 && newGame.deckCount[player] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:   76:
+    #####:   77:      drawCardFail++;
+    #####:   78:  }
+        -:   79:
+    20000:   80:  if( k == -1 && newGame.deckCount[player] !=0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:   81:
+    #####:   82:      drawCardFail++;
+    #####:   83:  }
+        -:   84:
+    20000:   85:  if (l == -1 && newGame.deckCount[player] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:   86:
+    #####:   87:      drawCardFail++;
+    #####:   88:  }
+        -:   89:
+        -:   90:
+        -:   91:    // verifying discards
+        -:   92:
+    40000:   93:      if (!(i == 0 && m == 0))
+branch  0 taken 100%
+branch  1 taken 0%
+branch  2 taken 0%
+branch  3 taken 100%
+        -:   94:      {
+    #####:   95:        if (i)
+branch  0 never executed
+branch  1 never executed
+        -:   96:        {
+    #####:   97:          cardEffectsFail++;
+    #####:   98:        }
+        -:   99:
+    #####:  100:        if (m)
+branch  0 never executed
+branch  1 never executed
+        -:  101:        {
+    #####:  102:          discardCardFails++;
+    #####:  103:        }
+    #####:  104:      }
+        -:  105:
+        -:  106:
+    20002:  107:      if(!(afterHC == beforeHC && afterDC == beforeDC))
+branch  0 taken 1%
+branch  1 taken 99%
+branch  2 taken 0%
+branch  3 taken 100%
+        -:  108:      {
+    19998:  109:        deckHandCountFail ++ ; 
+    19998:  110:      }
+        -:  111:
+        -:  112:
+        -:  113:
+    20000:  114:}
+        -:  115:
+        -:  116:
+function main called 2 returned 100% blocks executed 92%
+        -:  117:int main(){
+        -:  118:
+        -:  119:
+        -:  120:
+        -:  121:
+        -:  122:   
+        2:  123:    printf("Function: smithyTesting()\n");
+        -:  124:    
+        -:  125:
+        2:  126:    int times = 10000;
+        -:  127:    
+        -:  128:    int  gamePlayers;
+        -:  129:    
+        -:  130:    struct gameState state;
+        -:  131:    
+        2:  132:    srand(time(NULL));
+        -:  133:
+    40004:  134:    for (int n = 0; n < times; n++) {
+branch  0 taken 99%
+branch  1 taken 1%
+        -:  135:        
+1052040000:  136:        for ( int i = 0; i < sizeof(struct gameState); i++) {
+branch  0 taken 99%
+branch  1 taken 1%
+        -:  137:           
+526000000:  138:            ((char*)&state)[i] = floor(Random() * 256);
+        -:  139:        
+526000000:  140:        }
+    20000:  141:        gamePlayers = floor(Random() * MAX_PLAYERS);
+        -:  142:        
+    20000:  143:        state.deckCount[gamePlayers] = floor(Random() * MAX_DECK);
+        -:  144:        
+    20000:  145:        state.discardCount[gamePlayers] = floor(Random() * MAX_DECK);
+        -:  146:       
+    20000:  147:        state.handCount[gamePlayers] = floor(Random() * MAX_HAND);
+        -:  148:        
+    20000:  149:        state.playedCardCount = floor(Random() * (MAX_DECK-1));
+        -:  150:        
+    20000:  151:        state.whoseTurn = gamePlayers;
+        -:  152:       
+        -:  153:
+        -:  154:
+        -:  155:
+        -:  156:
+    20000:  157:        smithyTesting(gamePlayers,&state);
+    20000:  158:    }
+        6:  159:    int Fail_of_cards = cardEffectsFail + discardCardFails +
+        4:  160:                        drawCardFail + deckHandCountFail;
+        -:  161:   
+        2:  162:    printf("\n***** RESULTS *****\n");
+        -:  163:    
+        -:  164:   
+        2:  165:    printf("PASSED TESTS: %d\n",times - Fail_of_cards);
+        -:  166:   
+        -:  167:   
+        2:  168:    printf("FAILED TESTS: %d\n",Fail_of_cards);
+        -:  169:
+        2:  170:    if (Fail_of_cards == 0) {
+branch  0 taken 0%
+branch  1 taken 100%
+        -:  171:       
+    #####:  172:        printf (" PASSED RANDOM TEST \n\n");
+    #####:  173:    }
+        -:  174:    
+        -:  175:    else {
+        -:  176:       
+        2:  177:        printf("\n $$$$$$ FAILURE  DETAILS $$$$$$\n");
+        -:  178:       
+        2:  179:        printf("drawCard() fail: %d\n",drawCardFail);
+        -:  180:        
+        2:  181:        printf("cardEffect() fail: %d\n",cardEffectsFail);
+        -:  182:        
+        2:  183:        printf("discardCard() fail: %d\n",discardCardFails);
+        -:  184:        
+        2:  185:        printf("Hand/Deck Count failure: %d\n",deckHandCountFail);
+        -:  186:       
+        -:  187:       
+        -:  188:    }
+        -:  189:   
+        -:  190:   
+        -:  191:   
+        2:  192:    return 0;
+        -:  193:
+        -:  194:
+        -:  195:
+        -:  196:
+        -:  197:
+        -:  198:
+        -:  199:
+        -:  200:
+        -:  201:
+        -:  202:
+        -:  203:
+        -:  204:
+        -:  205:
+        -:  206:
+        -:  207:
+        -:  208:}
+        -:  209:
+        -:  210:
+        -:  211:
+        -:  212:
+        -:  213:
+        -:  214:
+        -:  215:
+        -:  216:
+        -:  217:
+        -:  218:
+        -:  219:
+        -:  220:
+        -:  221:
+        -:  222:
+        -:  223:
+        -:  224:

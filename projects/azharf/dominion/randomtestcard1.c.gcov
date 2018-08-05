@@ -1,0 +1,318 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <time.h>
+        -:    9:#include <string.h>
+        -:   10:
+        -:   11:
+        -:   12:
+        -:   13:
+        -:   14:
+        -:   15:int cardEffectsFail = 0; 
+        -:   16:int discardCardFails = 0 ; 
+        -:   17:int drawCardFail = 0 ; 
+        -:   18:int deckHandCountFail = 0; 
+        -:   19:int numFail = 0 ; 
+        -:   20:int Opponent_Player_Hand_Fail = 0 ; 
+        -:   21:
+        -:   22:
+        -:   23:// function to test the council room 
+        -:   24:
+function council_roomTesting called 20000 returned 100% blocks executed 59%
+        -:   25:void council_roomTesting( int p, struct gameState *after){
+        -:   26:
+        -:   27:  int a;
+        -:   28:  
+        -:   29:  int b;
+        -:   30:  
+        -:   31:   int c;
+        -:   32:  
+        -:   33:  int d; 
+        -:   34:  
+        -:   35:  int e; 
+        -:   36:  
+        -:   37:  int f;
+        -:   38:  int g;
+        -:   39:  
+        -:   40:  int h ;
+        -:   41:
+    20000:   42:  int bonus_play = 0 ; 
+        -:   43:
+        -:   44:  // take the functions functionality
+        -:   45:  struct gameState before; 
+        -:   46:
+        -:   47:
+    20000:   48:  memcpy(&before,after, sizeof(struct gameState));
+        -:   49:
+        -:   50:  // call the card to run with the smithycard function 
+    20000:   51:  a = cardEffect(council_room,0,0,0, after,0,&bonus_play);
+        -:   52:
+        -:   53:
+        -:   54:  // call the cards 
+    20000:   55:  b = drawCard(p,&before);
+    20000:   56:  c = drawCard(p,&before); 
+    20000:   57:  d = drawCard(p , &before); 
+    20000:   58:  e = drawCard(p,&before); 
+        -:   59:
+    20000:   60:  before.numBuys ++; 
+        -:   61:
+   160056:   62:  for (h = 0; h<before.numPlayers;h++){
+branch  0 taken 75%
+branch  1 taken 25%
+        -:   63:
+    60028:   64:    if (h != p){
+branch  0 taken 67%
+branch  1 taken 33%
+    40028:   65:      f = drawCard(h, &before);
+        -:   66:
+        -:   67:      // verify drawcard
+        -:   68:
+    40028:   69:      if ( f == -1 && before.deckCount[h] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+    #####:   70:        drawCardFail ++ ; 
+    #####:   71:      }
+    40028:   72:    }
+    60028:   73:  }
+        -:   74:
+        -:   75:
+    20000:   76:    g = discardCard(0,p, &before, 0); 
+        -:   77:
+        -:   78:
+    20000:   79:  int afterHC = after->handCount[p];
+        -:   80:  
+    20000:   81:  int afterDC = after->handCount[p]; 
+        -:   82:
+    20000:   83:  int beforeHC = before.handCount[p];
+        -:   84:  
+    20000:   85:  int beforeDC =  before.deckCount[p];
+        -:   86:
+        -:   87:
+        -:   88:
+    20000:   89:  if (before.numBuys != after->numBuys){
+branch  0 taken 0%
+branch  1 taken 100%
+        -:   90:
+    #####:   91:    numFail++ ; 
+    #####:   92:  }
+        -:   93:
+    20000:   94:  if ( b == -1 && before.deckCount[p] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+    #####:   95:      drawCardFail++;
+    #####:   96:  }
+        -:   97:
+    20000:   98:  if( c == -1 && before.deckCount[p] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+    #####:   99:      drawCardFail++; 
+    #####:  100:  }
+        -:  101:
+    20000:  102:  if (d == -1 && before.deckCount[p] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:  103:
+    #####:  104:      drawCardFail++;
+    #####:  105:  }
+        -:  106:
+    20000:  107:  if (e == -1 && before.deckCount[p] != 0){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+    #####:  108:      drawCardFail++; 
+    #####:  109:  }
+        -:  110:
+        -:  111:
+        -:  112:  // compare the cardeffect or discard to see if it fails
+        -:  113:
+    40000:  114:  if(!(a == 0 && g == 0)){
+branch  0 taken 100%
+branch  1 taken 0%
+branch  2 taken 0%
+branch  3 taken 100%
+        -:  115:
+    #####:  116:    if (a){
+branch  0 never executed
+branch  1 never executed
+    #####:  117:      cardEffectsFail++;
+    #####:  118:    }
+        -:  119:
+    #####:  120:    if(g){
+branch  0 never executed
+branch  1 never executed
+    #####:  121:      discardCardFails++;
+    #####:  122:    }
+    #####:  123:  }
+        -:  124:
+        -:  125:  // check for match found
+    20000:  126:if(!(afterDC == beforeHC && afterDC == beforeDC)){
+branch  0 taken 0%
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:  127:
+    20000:  128:    deckHandCountFail++; 
+    20000:  129:}
+        -:  130:
+        -:  131:
+   160056:  132:    for ( h = 0; h < before.numPlayers; h ++){
+branch  0 taken 75%
+branch  1 taken 25%
+        -:  133:
+    60028:  134:      if( h != p){
+branch  0 taken 67%
+branch  1 taken 33%
+        -:  135:
+    80056:  136:        if (!(after->handCount[h] == before.handCount[h] && after->deckCount[h] == before.deckCount[h])){
+branch  0 taken 100%
+branch  1 taken 0%
+branch  2 taken 0%
+branch  3 taken 100%
+        -:  137:
+    #####:  138:          Opponent_Player_Hand_Fail++; 
+    #####:  139:        }
+    40028:  140:      }
+    60028:  141:    }
+        -:  142:
+    20000:  143:}
+        -:  144:
+        -:  145:
+function main called 2 returned 100% blocks executed 94%
+        -:  146:int main()
+        -:  147:
+        -:  148:
+        -:  149:{
+        -:  150:
+        -:  151:   
+        2:  152:    printf(" THE RANDOM TEST OF Function: council_room()\n");
+        -:  153:    
+        -:  154:    int player;
+        2:  155:    int times = 10000;
+        2:  156:    int players [] = {2,3,4};
+        -:  157:    int  gamePlayers;
+        -:  158:    int handCount;
+        -:  159:    int deckCount;
+        -:  160:    int discardCount;
+        -:  161:    
+        -:  162:    struct gameState state;
+        -:  163:    
+        2:  164:    srand(time(NULL));
+        -:  165:
+    40004:  166:    for (int n = 0; n < times; n++) {
+branch  0 taken 99%
+branch  1 taken 1%
+        -:  167:        
+1052040000:  168:        for (  int i = 0; i < sizeof(struct gameState); i++) {
+branch  0 taken 99%
+branch  1 taken 1%
+        -:  169:           
+526000000:  170:            ((char*)&state)[i] = floor(Random() * 256);
+        -:  171:        
+526000000:  172:        }
+        -:  173:    
+    20000:  174:    state.numPlayers   = players[rand() % 3 ] ; 
+    20000:  175:     state.numBuys = 1; 
+    20000:  176:        state.playedCardCount = floor(Random() * (MAX_DECK-1));
+        -:  177:        
+    20000:  178:        player = state.numPlayers - 2; 
+        -:  179:
+    20000:  180:        deckCount = floor(Random() * MAX_DECK);
+    20000:  181:        handCount = floor(Random() * MAX_HAND);
+        -:  182:
+    20000:  183:        discardCount = floor(Random() * MAX_DECK);
+    20000:  184:        state.whoseTurn = player; 
+        -:  185:
+        -:  186:
+        -:  187:
+   160056:  188:          for ( int i = 0 ; i < state.numPlayers; i++){
+branch  0 taken 75%
+branch  1 taken 25%
+    60028:  189:              state.deckCount[i] = deckCount;
+    60028:  190:              state.handCount[i] = handCount;
+    60028:  191:              state.discardCount[i] = discardCount;
+    60028:  192:          }
+        -:  193:
+        -:  194:
+    20000:  195:          council_roomTesting(player, & state);
+        -:  196:
+        -:  197:
+        -:  198:
+    20000:  199:}
+        -:  200:
+        -:  201:
+        -:  202:
+        -:  203:
+        -:  204:
+        6:  205:    int Fail_of_cards = cardEffectsFail + discardCardFails +
+        4:  206:                        drawCardFail + deckHandCountFail + numFail;
+        -:  207:   
+        -:  208:    
+        -:  209:
+        -:  210:
+        -:  211:
+        -:  212:
+        2:  213:printf("\n RESULTS\n");
+        -:  214:
+        2:  215:printf("PASSED TESTS: %d\n",times - Fail_of_cards);
+        -:  216:
+        2:  217:printf("FAILED TEST: %d\n", Fail_of_cards);
+        -:  218:
+        -:  219:
+        -:  220:
+        -:  221:
+        -:  222:
+        2:  223:if (Fail_of_cards == 0) {
+branch  0 taken 0%
+branch  1 taken 100%
+        -:  224:       
+    #####:  225:        printf (" PASSED RANDOM TEST \n\n");
+    #####:  226:    }
+        -:  227:    
+        -:  228:    else {
+        -:  229:       
+        2:  230:        printf("\n $$$$$$ FAILURE  DETAILS $$$$$$\n");
+        -:  231:       
+        2:  232:        printf("drawCard() fail: %d\n",drawCardFail);
+        -:  233:        
+        2:  234:        printf("cardEffect() fail: %d\n",cardEffectsFail);
+        -:  235:        
+        2:  236:        printf("discardCard() fail: %d\n",discardCardFails);
+        -:  237:        
+        2:  238:        printf(" numFail count mismatch: %d\n",numFail);
+        -:  239:
+        -:  240:
+        2:  241:        printf("The Opponent_Player_Hand_Fail count mismatch: %d\n", Opponent_Player_Hand_Fail);
+        -:  242:       
+        2:  243:        printf("Deck hand count mismatch: %d\n", deckHandCountFail);
+        -:  244:
+        -:  245:
+        -:  246:
+        -:  247:    }
+        -:  248:
+        2:  249:      
+        -:  250:
+        -:  251:
+        -:  252:
+        2:  253:        return 0; 
+        -:  254:
+        -:  255:
+        -:  256:}
+        -:  257:
